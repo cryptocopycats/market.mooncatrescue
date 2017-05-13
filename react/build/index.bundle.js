@@ -9530,9 +9530,9 @@ var _react = __webpack_require__(32);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _ItemList = __webpack_require__(83);
+var _Item = __webpack_require__(83);
 
-var _ItemList2 = _interopRequireDefault(_ItemList);
+var _Item2 = _interopRequireDefault(_Item);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9551,8 +9551,10 @@ var HelloApp = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (HelloApp.__proto__ || Object.getPrototypeOf(HelloApp)).call(this, props));
 
     _this.handleChange = _this.handleChange.bind(_this);
-    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.handleClick = _this.handleClick.bind(_this);
     _this.state = { items: [], text: '' };
+
+    _this.maxLength = 160;
     return _this;
   }
 
@@ -9569,18 +9571,43 @@ var HelloApp = function (_React$Component) {
           null,
           title
         ),
+        _react2.default.createElement('textarea', { className: this.isValid() ? 'valid' : 'invalid',
+          rows: '3', cols: '84',
+          value: this.state.text, onChange: this.handleChange }),
         _react2.default.createElement(
-          'form',
-          { onSubmit: this.handleSubmit },
-          _react2.default.createElement('input', { onChange: this.handleChange, value: this.state.text }),
-          _react2.default.createElement(
-            'button',
-            null,
-            'Publish'
-          )
+          'span',
+          { style: { color: this.hasCharsRemaining() ? 'green' : 'red' } },
+          this.getCharsRemaining()
         ),
-        _react2.default.createElement(_ItemList2.default, { items: this.state.items })
+        _react2.default.createElement(
+          'button',
+          { disabled: !this.isValid(),
+            onClick: this.handleClick },
+          'Publish'
+        ),
+        _react2.default.createElement(
+          'div',
+          { 'class': 'items' },
+          this.state.items.map(function (item) {
+            return _react2.default.createElement(_Item2.default, { item: item });
+          })
+        )
       );
+    }
+  }, {
+    key: 'getCharsRemaining',
+    value: function getCharsRemaining() {
+      return this.maxLength - this.state.text.length;
+    }
+  }, {
+    key: 'hasCharsRemaining',
+    value: function hasCharsRemaining() {
+      return this.getCharsRemaining() > 0;
+    }
+  }, {
+    key: 'isValid',
+    value: function isValid() {
+      return this.state.text.length > 0 && this.getCharsRemaining() >= 0;
     }
   }, {
     key: 'handleChange',
@@ -9588,20 +9615,23 @@ var HelloApp = function (_React$Component) {
       this.setState({ text: e.target.value });
     }
   }, {
-    key: 'handleSubmit',
-    value: function handleSubmit(e) {
+    key: 'handleClick',
+    value: function handleClick(e) {
       e.preventDefault();
       var newItem = {
         text: this.state.text,
         id: Date.now()
       };
-      // note: use unshift to prepend new items upfront (reverse chronological order)
       this.setState(function (prevState) {
-        return {
-          // items: prevState.items.unshift( newItem ),
-          items: prevState.items.concat(newItem),
-          text: ''
-        };
+        return (
+          // note: use unshift to prepend new items upfront (reverse chronological order)
+          //   todo: find a better way
+          prevState.items.unshift(newItem), // note: unshift returns array size (NOT array)
+          {
+            items: prevState.items,
+            text: ''
+          }
+        );
       });
     }
   }]);
@@ -9651,37 +9681,43 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
   todo: convert to a function - why? why not?
  */
 
-var ItemList = function (_React$Component) {
-  _inherits(ItemList, _React$Component);
+var Item = function (_React$Component) {
+  _inherits(Item, _React$Component);
 
-  function ItemList() {
-    _classCallCheck(this, ItemList);
+  function Item() {
+    _classCallCheck(this, Item);
 
-    return _possibleConstructorReturn(this, (ItemList.__proto__ || Object.getPrototypeOf(ItemList)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).apply(this, arguments));
   }
 
-  _createClass(ItemList, [{
+  _createClass(Item, [{
     key: 'render',
     value: function render() {
+      var item = this.props.item;
+
       return _react2.default.createElement(
         'div',
-        null,
-        this.props.items.map(function (item) {
-          return _react2.default.createElement(
-            'p',
-            { key: item.id },
-            item.text
-          );
-        })
+        { style: {
+            padding: 10,
+            margin: 10,
+            background: 'white',
+            boxShadow: '0 1px 5px rgba(0,0,0,0.5)'
+          },
+          key: item.id },
+        _react2.default.createElement(
+          'p',
+          null,
+          item.text
+        )
       );
     }
   }]);
 
-  return ItemList;
-}(_react2.default.Component); // class ItemList
+  return Item;
+}(_react2.default.Component); // class Item
 
 
-exports.default = ItemList;
+exports.default = Item;
 
 /***/ }),
 /* 84 */
