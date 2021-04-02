@@ -14,7 +14,7 @@ Example:
 
 
 ```
-timestamp, id, price (in eth), price (in wei), from, to, block
+timestamp,           id,           price (in eth), price (in wei), from,        to,            block
 2017-08-10 17:52:26, 0xff00000ca7, 0.300000, 300000000000000000, 0x00000000..., 0x47dabf35..., 4141192
 2017-08-10 20:04:15, 0xff04000ca7, 0.300000, 300000000000000000, 0x00000000..., 0x66007e80..., 4141588
 2017-08-10 20:09:33, 0x0068f5b6d8,        -,                  -, 0xf22fe995..., 0x69017e33..., 4141603
