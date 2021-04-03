@@ -1,4 +1,75 @@
-# MoonCatRescue Market Sales Data
+# MoonCatRescue Market Data
+
+## Prices Dataset
+
+
+All sales tracked via the
+blockchain recorded `CatAdopted` event from the `MoonCatRescue` contract
+(where price greater than zero)
+in comma-separated values (CSV) format.
+One datafile for every day with transaction count
+(in parenthesis)
+and filed per year
+(e.g. `2017/2017-08-10_(13)` or `2021/2021-03-12_(313)`).
+Example:
+
+
+```
+timestamp,           id,           price (in eth), price (in wei)
+2017-08-10 16:23:56, 0xff0e000ca7, 0.300000, 300000000000000000
+2017-08-10 16:23:56, 0xff0f000ca7, 0.300000, 300000000000000000
+2017-08-10 16:27:01, 0x0057774705, 0.100000, 100000000000000000
+...
+```
+
+Note: For more transactions details (incl. from, to, block, etc.)
+see the CatAdopted Dataset (below).
+
+```
+prices/
+  ├───2017/
+  │       2017-08-10_(13).csv
+  │       2017-08-11_(1).csv
+  │       2017-08-12_(19).csv
+  │       2017-08-13_(3).csv
+  │       2017-08-16_(3).csv
+  │       2017-09-01_(1).csv
+  │       2017-12-07_(1).csv
+  │       2017-12-13_(1).csv
+  │       2017-12-27_(5).csv
+  │
+  ├───2018/
+  │       2018-01-23_(2).csv
+  │       2018-03-18_(1).csv
+  │       2018-03-21_(1).csv
+  │       2018-04-14_(2).csv
+  │       2018-04-29_(2).csv
+  │
+  └───2021/
+          2021-03-12_(313).csv
+          2021-03-13_(89).csv
+          2021-03-14_(374).csv
+          2021-03-15_(305).csv
+          2021-03-16_(120).csv
+          2021-03-17_(113).csv
+          2021-03-18_(195).csv
+          2021-03-19_(42).csv
+          2021-03-20_(151).csv
+          2021-03-21_(36).csv
+          2021-03-22_(56).csv
+          2021-03-23_(60).csv
+          2021-03-24_(43).csv
+          2021-03-25_(51).csv
+          2021-03-26_(18).csv
+          2021-03-27_(9).csv
+          2021-03-28_(5).csv
+          2021-03-29_(15).csv
+          2021-03-30_(8).csv
+          2021-03-31_(9).csv
+          2021-04-01_(25).csv
+          2021-04-02_(7).csv
+```
+
 
 
 ## CatAdopted Dataset
